@@ -1,0 +1,27 @@
+@import "../index.css";
+h1 {
+  font-family: Kaushan Script, sans-serif;
+  font-size: 100px;
+  margin-bottom: 0;
+}
+h2 {
+  font-size: 32px;
+  font-weight: normal;
+  color: var(--on-background-alt);
+}
+.title-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.homeImage {
+  width: 45%;
+  aspect-ratio: 16/9;
+  border-radius: 300px;
+}
+.homeImage-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}

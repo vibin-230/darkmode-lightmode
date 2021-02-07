@@ -13,6 +13,10 @@ a {
   border-bottom: 3px solid transparent;
   font-weight: bold;
 }
+a:hover {
+  color: var(--on-background);
+  border-bottom: 3px solid var(--on-background);
+}
 
 #nav {
   z-index: 10;
