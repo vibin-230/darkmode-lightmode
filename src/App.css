@@ -25,7 +25,7 @@ a:hover {
   letter-spacing: 3px;
   padding: 25px;
   width: 100%;
-  background: rgb(255 255 255 / 50%);
+  background: var(--nav-background);
 }
 
 #home {
@@ -55,4 +55,65 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* toggle button */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  z-index: 100;
+  position: fixed;
+  right: 25px;
+  top: 30px;
+}
+
+.theme-switch-wrapper span {
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.toggle-container {
+  width: 50px;
+  background-color: #c4c4c4;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 40px;
+  padding: 2px;
+  height: 20px;
+  position: relative;
+}
+#toggle-icon {
+  display: flex;
+  align-items: center;
+}
+
+.dialog-button {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #f2f2f2f2;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 18px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  min-width: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26px;
+  min-width: unset;
+  border-radius: 40px;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  left: 26px;
+  transition: all 0.3s ease;
+}
+
+.disabled {
+  background-color: var(--primary-color);
+}
+.disabled-button {
+  left: 2px;
 }
