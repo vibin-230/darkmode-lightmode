@@ -8,15 +8,20 @@ import { Contacts } from "./contacts/Contacts";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 function App() {
-  const [selected, setSelected] = useState(true);
+  console.log(localStorage.getItem("theme"));
+  const [selected, setSelected] = useState(localStorage.getItem("theme"));
   const toggleSelected = (event) => {
-    setSelected(!selected);
+    if (selected === "light") setSelected("dark");
+    else setSelected("light");
   };
+
   useEffect(() => {
-    if (selected) {
+    if (selected === "dark") {
       document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
     } else {
       document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
     }
   }, [selected]);
   return (
@@ -25,16 +30,24 @@ function App() {
       <div className="theme-switch-wrapper">
         <span id="toggle-icon">
           <span className="toggle-text">
-            {selected ? "Light Mode" : "Dark Mode"}
+            {selected === "dark" ? "Light Mode" : "Dark Mode"}
           </span>
-          {selected ? <FaSun size="1.5rem" /> : <FaMoon size="1.5rem" />}
+          {selected === "dark" ? (
+            <FaSun size="1.5rem" />
+          ) : (
+            <FaMoon size="1.5rem" />
+          )}
         </span>
         <div
-          className={`toggle-container ${selected ? "" : "disabled"}`}
+          className={`toggle-container ${
+            selected === "dark" ? "" : "disabled"
+          }`}
           onClick={toggleSelected}
         >
           <div
-            className={`dialog-button  ${selected ? "" : "disabled-button"}`}
+            className={`dialog-button  ${
+              selected === "dark" ? "" : "disabled-button"
+            }`}
           ></div>
         </div>
       </div>
