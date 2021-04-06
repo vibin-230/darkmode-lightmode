@@ -19,9 +19,9 @@ export const Nav = (props) => {
           <a href="#about" className="about">
             ABOUT
           </a>
-          <a href="#projects" className="projects">
+          {/* <a href="#projects" className="projects">
             PROJECTS
-          </a>
+          </a> */}
           <a href="#contacts" className="contacts">
             CONTACTS
           </a>
