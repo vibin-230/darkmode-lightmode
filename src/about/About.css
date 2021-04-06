@@ -1,0 +1,9 @@
+.about-contianer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 100px;
+  line-height: 35px;
+  letter-spacing: 0.7px;
+  font-size: 27px;
+}

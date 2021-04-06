@@ -1,79 +1,59 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import { Home } from "./home/Home";
-import { About } from "./about/About";
-import { Projects } from "./projects/Projects";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Contacts } from "./contacts/Contacts";
+import { useLocalStorageState } from "./customHooks";
+
 import { FaSun, FaMoon } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { PageWrapper } from "./PageWrapper";
+import { CSSTransition } from "react-transition-group";
 
 function App() {
-  console.log(localStorage.getItem("theme"));
-  const [selected, setSelected] = useState(localStorage.getItem("theme"));
+  const [selected, setSelected] = useLocalStorageState("theme", "dark");
+  const [changeMode, setChangeMode] = useState(false);
+  const [darkTime, setDarkTime] = useState(0);
+  const [lightTime, setLightTime] = useState(0);
+  const [currentLink, setCurrentLink] = useState(0);
+
   const toggleSelected = (event) => {
-    if (selected === "light") setSelected("dark");
-    else setSelected("light");
+    if (selected === "light") {
+      setSelected("dark");
+      setDarkTime(darkTime + 1);
+    } else {
+      setSelected("light");
+      setLightTime(lightTime + 1);
+    }
   };
 
   useEffect(() => {
-    if (selected === "dark") {
-      document.documentElement.setAttribute("data-theme", "light");
-      localStorage.setItem("theme", "light");
-    } else {
-      document.documentElement.setAttribute("data-theme", "dark");
-      localStorage.setItem("theme", "dark");
-    }
+    document.documentElement.setAttribute("data-theme", selected);
   }, [selected]);
+
   return (
     <div className="App">
       {/* drak light toggle switch */}
-      <div className="theme-switch-wrapper">
-        <span id="toggle-icon">
-          <span className="toggle-text">
-            {selected === "dark" ? "Light Mode" : "Dark Mode"}
-          </span>
-          {selected === "dark" ? (
-            <FaSun size="1.5rem" />
-          ) : (
-            <FaMoon size="1.5rem" />
-          )}
-        </span>
-        <div
-          className={`toggle-container ${
-            selected === "dark" ? "" : "disabled"
-          }`}
+      {/* <span className="theme-toggle-container">
+        <span
+          id="toggle-icon"
+          style={{ position: "relative" }}
           onClick={toggleSelected}
         >
-          <div
-            className={`dialog-button  ${
-              selected === "dark" ? "" : "disabled-button"
+          <span
+            className={`sunContainer ${
+              selected === "light" ? "activeSun" : "removeSun"
             }`}
-          ></div>
-        </div>
-      </div>
-      {/* navigation */}
-      <nav id="nav">
-        <a href="#home">HOME</a>
-        <a href="#about">ABOUT</a>
-        <a href="#projects">PROJECTS</a>
-        <a href="#contacts">CONTACTS</a>
-      </nav>
-      {/* home section */}
-      <section id="home">
-        <Home />
-      </section>
-      {/* about section */}
-      <section id="about">
-        <About />
-      </section>
-      {/* projects section */}
-      <section id="projects">
-        <Projects />
-      </section>
-      {/* contact section */}
-      <section id="contacts">
-        <Contacts />
-      </section>
+          >
+            <FaSun size="1.5rem" />
+          </span>
+          <span
+            className={`moonContainer ${
+              selected === "dark" ? "activeMoon" : "removeMoon"
+            }`}
+          >
+            <FaMoon size="1.5rem" />
+          </span>
+        </span>
+      </span> */}
+      <PageWrapper toggleSelected={toggleSelected} selected={selected} />
     </div>
   );
 }
